@@ -13,7 +13,6 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.ItemStack
-import taboolib.common.platform.function.info
 import taboolib.module.chat.colored
 import taboolib.module.ui.ClickEvent
 import taboolib.module.ui.openMenu
@@ -103,7 +102,6 @@ object MainView : View {
             // 打开上传界面
             onClick { it ->
                 val rawSlot = it.rawSlot
-                info("点击位置为: $rawSlot")
                 if (rawSlot >= 54 || rawSlot == -999) {
                     UploadView.open(sender, username)
                 }
