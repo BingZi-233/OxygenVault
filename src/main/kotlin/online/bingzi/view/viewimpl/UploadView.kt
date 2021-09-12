@@ -2,6 +2,9 @@ package online.bingzi.view.viewimpl
 
 import online.bingzi.repository.impl.OxygenRepository
 import online.bingzi.util.Tools.builderItem
+import online.bingzi.util.Tools.conf
+import online.bingzi.util.moneyPlayerPoints
+import online.bingzi.util.moneyVault
 import online.bingzi.view.View
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -59,11 +62,13 @@ object UploadView : View {
                     val player = event.clicker
                     if (get.count >= get.page) {
                         // 是不是有右键单击
-                        val result = /*if (event.clickEvent().click.isRightClick) {
-                            moneyPlayerPoints.remove(player, conf.getDouble("RemoveItems.PlayerPoints"))
+                        val result = if (event.clickEvent().click.isRightClick) {
+                            moneyPlayerPoints.remove(player, conf.getDouble("UploadItem.PlayerPoints"))
+                        } else if (event.clickEvent().click.isLeftClick) {
+                            moneyVault.remove(player, conf.getDouble("UploadItem.Vault"))
                         } else {
-                            moneyVault.remove(player, conf.getDouble("RemoveItems.Vault"))
-                        }*/true
+                            false
+                        }
                         if (result) {
                             get.itemStacks.add(element)
                             event.inventory.setItem(event.rawSlot, ItemStack(Material.AIR))

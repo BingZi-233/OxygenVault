@@ -8,19 +8,19 @@ class MoneyPlayerPoints : Money {
     private val api = PlayerPoints.getInstance().api
 
     override fun get(player: Player): Double {
-        return api?.lookAsync(player.uniqueId)?.get()?.toDouble() ?: 0.0
+        return api?.look(player.uniqueId)?.toDouble() ?: 0.0
     }
 
     override fun add(player: Player, amount: Double): Boolean {
         if (api != null) {
-            return api.giveAsync(player.uniqueId, amount.toInt()).get()
+            return api.give(player.uniqueId, amount.toInt())
         }
         return false
     }
 
     override fun remove(player: Player, amount: Double): Boolean {
         if (api != null) {
-            return api.takeAsync(player.uniqueId, amount.toInt()).get()
+            return api.take(player.uniqueId, amount.toInt())
         }
         return false
     }

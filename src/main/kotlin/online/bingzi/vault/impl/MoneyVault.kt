@@ -23,9 +23,19 @@ class MoneyVault : Money {
     override fun remove(player: Player, amount: Double): Boolean {
         if (api != null) {
             if (api.has(player, amount)) {
-                val bankWithdraw = api.bankWithdraw(player.name, amount)
-                if (bankWithdraw.type == EconomyResponse.ResponseType.SUCCESS) {
-                    return true
+                return when (api.withdrawPlayer(player.name, amount).type) {
+                    EconomyResponse.ResponseType.SUCCESS -> {
+                        true
+                    }
+                    EconomyResponse.ResponseType.NOT_IMPLEMENTED -> {
+                        false
+                    }
+                    EconomyResponse.ResponseType.FAILURE -> {
+                        false
+                    }
+                    null -> {
+                        false
+                    }
                 }
             }
         }
