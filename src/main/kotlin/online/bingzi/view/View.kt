@@ -1,5 +1,7 @@
 package online.bingzi.view
 
-class View {
+import org.bukkit.entity.Player
 
+interface View {
+    fun open(sender: Player, username: String)
 }

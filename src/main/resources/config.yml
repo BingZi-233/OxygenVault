@@ -1,0 +1,20 @@
+# 最大页数
+MaxNumberOfPages: 5
+# 解锁耗费
+UnLock:
+  # 金币
+  Vault: 500
+  # 点券
+  PlayerPoints: 200
+# 取出物品
+RemoveItems:
+  # 金币
+  Vault: 100
+  # 点券
+  PlayerPoints: 100
+# 放入物品
+UploadItem:
+  # 金币
+  Vault: 50
+  # 点券
+  PlayerPoints: 50

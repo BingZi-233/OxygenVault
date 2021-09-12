@@ -1,24 +1,23 @@
 package online.bingzi
 
 import taboolib.common.platform.Plugin
-import taboolib.module.configuration.Config
-import taboolib.module.configuration.SecuredFile
+import taboolib.common.platform.function.info
 
-class OxygenVault : Plugin() {
-    // 配置文件注册
-    @Config
-    lateinit var config: SecuredFile
-        private set
+object OxygenVault : Plugin() {
 
     override fun onLoad() {
+        info("Oxygen Vault plugin in loading...")
 
+        info("Oxygen Vault plugin load is ok!")
     }
 
     override fun onEnable() {
-
+        info("Oxygen Vault plugin in enabling...")
+        info("Oxygen Vault plugin enable is ok!")
     }
 
     override fun onDisable() {
-
+        info("Oxygen Vault plugin in disabling...")
+        info("Oxygen Vault plugin disable is ok!")
     }
 }

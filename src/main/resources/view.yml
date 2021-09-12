@@ -1,0 +1,73 @@
+# 界面标题
+Title: "[Oxygen仓库界面]"
+# 按钮
+Button:
+  # 下一页
+  Next:
+    # 界面设置
+    display:
+      # 物品类型
+      mats:
+      # 物品名称
+      Name: ""
+      # 物品描述
+      Lore:
+        - ""
+    # 隐藏
+    flag:
+      - "HIDE_ATTRIBUTES"
+    # 是否发光
+    shiny: false
+    # 附加模型参数
+    CustomModelData: 0
+  # 下一页已达到最大值或者解锁最大值
+  NextEnd:
+    display:
+      mats:
+      Name: ""
+      Lore:
+        - ""
+    flag:
+      - "HIDE_ATTRIBUTES"
+    shiny: false
+    CustomModelData: 0
+  # 返回
+  Back:
+    display:
+      mats:
+      Name: ""
+      Lore:
+        - ""
+    flag:
+      - "HIDE_ATTRIBUTES"
+    shiny: false
+    CustomModelData: 0
+    # 点击后执行的命令
+    Command:
+      # 是否已玩家身份
+      isPlayer: true
+      # 命令列表
+      Cmd:
+        - ""
+  # 上一页
+  Previous:
+    display:
+      mats:
+      Name: ""
+      Lore:
+        - ""
+    flag:
+      - "HIDE_ATTRIBUTES"
+    shiny: false
+    CustomModelData: 0
+  # 上一页已达到最大值及没有上一页了
+  PreviousEnd:
+    display:
+      mats:
+      Name: ""
+      Lore:
+        - ""
+    flag:
+      - "HIDE_ATTRIBUTES"
+    shiny: false
+    CustomModelData: 0

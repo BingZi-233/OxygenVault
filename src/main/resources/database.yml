@@ -1,0 +1,92 @@
+# 是否启用MySQL数据库链接
+# 如果启用，则需要对下面设置进行修改
+# 否则，则使用本地存储方式
+Enable: false
+# MySQL链接配置
+MySQL:
+  # 地址
+  Host: "localhost"
+  # 端口
+  # 默认值：3306
+  Port: 3306
+  # 用户名
+  # 默认值：root
+  Username: "root"
+  # 密码
+  # 默认值：root
+  Password: "root"
+  # 数据库名称
+  # 指存放到哪一个数据库中
+  # 默认值：OxygenVault
+  Database: "OxygenVault"
+  # 表前缀
+  # 指表名的前缀
+  # 默认值：Oxygen
+  TablePrefix: "Oxygen"
+# HikariCP 带有合理的默认值，无需额外调整即可在大多数部署中表现良好
+# https://github.com/brettwooldridge/HikariCP#gear-configuration-knobs-baby
+HikariCP:
+  # HikariCP 将尝试通过 DriverManager 仅基于 jdbcUrl 解析驱动程序，
+  # 但对于一些较旧的驱动程序，还必须指定 driverClassName。
+  # 除非您收到一条明显的错误消息，表明未找到驱动程序，否则请忽略此属性。默认值：com.mysql.jdbc.Driver
+  DriverClassName: 'com.mysql.cj.jdbc.Driver'
+  # 此属性控制从池返回的连接的默认自动提交行为。
+  # 它是一个布尔值。默认值：真
+  AutoCommit: true
+  # 此属性控制 HikariCP 尝试在池中维护的最小空闲连接数。
+  # 如果空闲连接数低于此值并且池中的总连接数小于 maximumPoolSize，
+  # HikariCP 将尽最大努力快速有效地添加额外的连接。
+  # 但是，为了获得最高性能和对峰值需求的响应，我们建议不要设置此值，而是允许 HikariCP 充当固定大小的连接池。
+  # 默认值：与 maximumPoolSize 相同
+  MinimumIdle: 10
+  # 此属性控制池允许达到的最大大小，包括空闲连接和正在使用的连接。
+  # 基本上，这个值将决定到数据库后端的实际连接的最大数量。
+  # 合理的值最好由您的执行环境确定。
+  # 当池达到这个大小，并且没有空闲连接可用时，对getConnection()的调用将阻塞到connectionTimeout，直到超时的几毫秒。
+  # 请阅读有关游泳池大小。默认值:10
+  MaximumPoolSize: 10
+  # 此属性控制将测试连接是否活跃的最大时间。
+  # 该值必须小于connectionTimeout。最低可接受的验证超时是250毫秒。默认值:5000
+  ValidationTimeout: 5000
+  # 此属性控制客户端(即您)等待池连接的最大毫秒数。
+  # 如果超过这个时间而没有连接可用，则会抛出SQLException。
+  # 最低可接受的连接超时是250毫秒。默认值:30000(30秒)
+  ConnectionTimeout: 30000
+  # 此属性控制连接池中允许空闲的最大时间。
+  # 此设置仅在minimumIdle定义为小于maximumPoolSize时适用。
+  # 一旦池达到最小空闲连接，空闲连接将不会被退休。
+  # 连接是否作为空闲状态退出取决于最大变化量+30秒，平均变化量+15秒。
+  # 在此超时之前，连接永远不会以空闲状态退出。
+  # 值为0意味着永远不会从池中删除空闲连接。
+  # 允许的最小值是10000ms(10秒)。默认值:600000(10分钟)
+  IdleTimeout: 600000
+  # 此属性控制池中连接的最大生存期。
+  # 一个正在使用的连接永远不会被撤销，只有当它被关闭时才会被删除。
+  # 在一个接一个的基础上，采用较小的负衰减来避免池中的质量灭绝。
+  # 我们强烈建议设置这个值，它应该比任何数据库或基础设施强加的连接时间限制短几秒。
+  # 值0表示没有最大生存期(无限生存期)，当然取决于idleTimeout设置。
+  # 允许的最小值是30000ms(30秒)。默认值:1800000(30分钟)
+  MaxLifetime: 1800000
+  # 如果您的驱动程序支持JDBC4，我们强烈建议不要设置此属性。
+  # 这适用于不支持JDBC4 Connection.isValid() API的“遗留”驱动程序。
+  # 这个查询将在从池中向您提供连接之前执行，以验证到数据库的连接是否仍然处于活动状态。
+  # 同样，尝试在没有此属性的情况下运行池，如果您的驱动程序不兼容JDBC4, HikariCP将记录一个错误以让您知道。默认值:~
+  ConnectionTestQuery: ~
+  # MySQL配置
+  # 为了获得MySQL的最佳性能，以下是我们推荐的一些设置。
+  # 在MySQL中还有许多其他与性能相关的设置，我们建议您检查所有这些设置，以确保您的应用程序获得最佳性能。
+  # http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html
+  DataSourceProperty:
+    # 这将设置MySQL驱动程序在每个连接中缓存的准备语句的数量。
+    # 默认值是保守的25。我们建议将其设置为250-500之间。
+    prepStmtCacheSize: 250
+    # 这是驱动程序将要缓存的准备好的SQL语句的最大长度。MySQL默认值是256。
+    # 根据我们的经验，特别是使用Hibernate这样的ORM框架时，这个默认值远远低于生成语句长度的阈值。
+    # 我们推荐的设置是2048。
+    prepStmtCacheSqlLimit: 2048
+    # 在默认情况下，如果缓存实际上是禁用的，那么上述两个参数都不会产生任何影响。
+    # 必须设置为“true”
+    cachePrepStmts: true
+    # 新版本的MySQL支持服务器端准备语句，这可以提供一个实质性的性能提升。
+    # 将此属性设置为true。
+    useServerPrepStmts: true
