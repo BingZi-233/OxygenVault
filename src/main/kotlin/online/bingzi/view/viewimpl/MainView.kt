@@ -14,6 +14,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.ItemStack
 import taboolib.module.chat.colored
+import taboolib.module.configuration.util.getStringColored
 import taboolib.module.ui.ClickEvent
 import taboolib.module.ui.openMenu
 import taboolib.module.ui.type.Linked
@@ -22,7 +23,6 @@ import taboolib.platform.util.giveItem
 
 object MainView : View {
     override fun open(sender: Player, username: String) {
-        val unLockButton = "NextEnd".builderItem()
         // 如果获取到的是一个NULL对象，则新建一个Oxygen对象用于玩家数据存储
         val get = OxygenRepository.get(username) ?: Oxygen(username, ArrayList(), 1)
         // 内容区域
@@ -97,6 +97,9 @@ object MainView : View {
                     get.deleteItemStack(element)
                     OxygenRepository.set(get)
                     open(sender, username)
+                } else {
+                    conf.getStringColored("Lang.PushDeductionError")?.replacePlaceholder(sender)?.colored()
+                        ?.let { sender.sendMessage(it) }
                 }
             }
             // 打开上传界面

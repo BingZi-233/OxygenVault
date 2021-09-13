@@ -18,3 +18,7 @@ UploadItem:
   Vault: 50
   # 点券
   PlayerPoints: 50
+Lang:
+  UploadDeductionError: "扣款失败!"
+  UploadMax: "仓库已经存不下了，请扩充仓库后重新尝试！"
+  PushDeductionError: "扣款失败!"

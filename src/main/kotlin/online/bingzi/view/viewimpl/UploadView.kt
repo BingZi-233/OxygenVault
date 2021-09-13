@@ -10,9 +10,11 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import taboolib.common.platform.function.warning
+import taboolib.module.chat.colored
+import taboolib.module.configuration.util.getStringColored
 import taboolib.module.ui.openMenu
 import taboolib.module.ui.type.Linked
-import taboolib.platform.util.sendWarnMessage
+import taboolib.platform.compat.replacePlaceholder
 
 object UploadView : View {
     override fun open(sender: Player, username: String) {
@@ -74,9 +76,14 @@ object UploadView : View {
                             event.inventory.setItem(event.rawSlot, ItemStack(Material.AIR))
                             player.inventory.removeItem(element)
                             OxygenRepository.set(get)
+                        } else {
+                            conf.getStringColored("Lang.UploadDeductionError")?.colored()?.replacePlaceholder(player)
+                                ?.let { player.sendMessage(it) }
                         }
                     } else {
-                        sender.sendWarnMessage("仓库已经存不下了，请扩充仓库后重新尝试！")
+                        conf.getStringColored("Lang.UploadMax")?.colored()?.replacePlaceholder(player)?.let {
+                            player.sendMessage(it)
+                        }
                         return@onClick
                     }
                 }
