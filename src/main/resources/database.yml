@@ -5,20 +5,20 @@ Enable: false
 # MySQL链接配置
 MySQL:
   # 地址
-  Host: "localhost"
+  host: "localhost"
   # 端口
   # 默认值：3306
-  Port: 3306
+  port: 3306
   # 用户名
   # 默认值：root
-  Username: "root"
+  username: "root"
   # 密码
   # 默认值：root
-  Password: "root"
+  password: "root"
   # 数据库名称
   # 指存放到哪一个数据库中
   # 默认值：OxygenVault
-  Database: "OxygenVault"
+  database: "OxygenVault"
   # 表前缀
   # 指表名的前缀
   # 默认值：Oxygen

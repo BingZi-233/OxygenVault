@@ -13,12 +13,12 @@ class DatabaseSQL : Database() {
         add { id() }
         // 唯一主键
         add("username") {
-            type(ColumnTypeSQL.TEXT, 32) {
-                options(ColumnOptionSQL.UNIQUE_KEY)
+            type(ColumnTypeSQL.VARCHAR, 64) {
+                options(ColumnOptionSQL.KEY)
             }
         }
         add("data") {
-            type(ColumnTypeSQL.TEXT, 65535)
+            type(ColumnTypeSQL.TEXT)
         }
         add("count") {
             type(ColumnTypeSQL.INT)
